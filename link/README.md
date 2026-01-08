@@ -7,3 +7,9 @@ https://www.youtube.com/watch?v=O2YYZIiDyX0
 https://www.youtube.com/watch?v=7brycQhxTYw
 
 ---
+
+**2026_01_06_早上**
+
+https://www.youtube.com/watch?v=3DftL1H7W7U
+
+---
