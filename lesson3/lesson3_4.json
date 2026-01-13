@@ -1,0 +1,168 @@
+{
+  "name": "lesson3_4",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        -48
+      ],
+      "id": "752c8955-8fbf-4469-8dde-38d556bdbe5e",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://data.taipei/api/dataset/9cb8ebf1-8d21-4523-908c-af853867eea1/resource/cec51213-9585-4b4a-ae18-5c9309ddf453/download",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -64,
+        -48
+      ],
+      "id": "650d26e8-6999-4584-94cc-93a215acca3d",
+      "name": "下載職缺資訊csv檔案"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        144,
+        -48
+      ],
+      "id": "69828a59-cc36-4fef-aaf3-03ecf2fa965f",
+      "name": "將csv轉換為json的格式"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e7076e74-f0da-420b-a368-e79ee455c67a",
+              "name": "﻿公司名稱",
+              "value": "={{ $json['﻿公司名稱'] }}",
+              "type": "string"
+            },
+            {
+              "id": "0754f3a1-10d5-4029-9d13-ea5d68470449",
+              "name": "職缺",
+              "value": "={{ $json['職缺'] }}",
+              "type": "string"
+            },
+            {
+              "id": "9b600298-ce0d-4429-b1c1-0c55d4cc7f7f",
+              "name": "職缺數",
+              "value": "={{ $json['職缺數'] }}",
+              "type": "number"
+            },
+            {
+              "id": "2fb43258-b1ca-4c16-bd30-2947c5faac12",
+              "name": "薪資起",
+              "value": "={{ $json['薪資起'] }}",
+              "type": "string"
+            },
+            {
+              "id": "34642c5f-b0af-46bb-8b7c-c6afcb5d8cf6",
+              "name": "活動地點",
+              "value": "={{ $json['活動地點'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        -48
+      ],
+      "id": "4cb9895f-af52-4598-981e-c66c90813811",
+      "name": "清理資料"
+    },
+    {
+      "parameters": {
+        "operation": "xls",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        -48
+      ],
+      "id": "a081d40b-d60d-4e42-8bb4-58d8d02ffa11",
+      "name": "Convert to File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "下載職缺資訊csv檔案",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "下載職缺資訊csv檔案": {
+      "main": [
+        [
+          {
+            "node": "將csv轉換為json的格式",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "將csv轉換為json的格式": {
+      "main": [
+        [
+          {
+            "node": "清理資料",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "清理資料": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "0bf26078-adb7-48b4-bad6-d9a88476f266",
+  "meta": {
+    "instanceId": "d135f5bcfa8bdece905b6d778df94a7be68624c12d1878e14ba64eeb17a04d82"
+  },
+  "id": "ydLEhpxATKo_86egnv-FE",
+  "tags": []
+}
