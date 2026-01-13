@@ -78,11 +78,25 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        96,
+        80,
         -80
       ],
       "id": "3a8c458d-4743-437b-9012-d9f55a62d51a",
       "name": "過濾資料"
+    },
+    {
+      "parameters": {
+        "operation": "xls",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        288,
+        -80
+      ],
+      "id": "7b43db71-8813-4923-b95c-b8381d5f2400",
+      "name": "儲存為excel檔"
     }
   ],
   "connections": {
@@ -102,6 +116,17 @@
         [
           {
             "node": "過濾資料",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "過濾資料": {
+      "main": [
+        [
+          {
+            "node": "儲存為excel檔",
             "type": "main",
             "index": 0
           }
