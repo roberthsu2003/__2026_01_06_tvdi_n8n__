@@ -1,0 +1,100 @@
+{
+  "name": "lesson3_1",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b9207f4f-de5e-4f8a-b164-287b65c72ceb",
+      "name": "觸發點"
+    },
+    {
+      "parameters": {
+        "operation": "getAllPeople"
+      },
+      "type": "n8n-nodes-base.n8nTrainingCustomerDatastore",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "3a576858-997b-4bd6-a3ae-1ba46f361526",
+      "name": "Customer Datastore (n8n training)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a4bdac89-7632-4b53-81aa-6d7b7de9dabd",
+              "name": "編號",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "1ace4e4b-4a3f-4074-a40b-c367fcc15865",
+              "name": "姓名",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "c5395f66-84d8-4067-b86b-c108afe89786",
+              "name": "暱名",
+              "value": "={{ $json['name'] }}先生",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "86aaf686-3f2e-41a7-ad2c-152d4fefa353",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "觸發點": {
+      "main": [
+        [
+          {
+            "node": "Customer Datastore (n8n training)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Customer Datastore (n8n training)": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "724abef7-bd56-4c90-9b38-5101c138351a",
+  "meta": {
+    "instanceId": "d135f5bcfa8bdece905b6d778df94a7be68624c12d1878e14ba64eeb17a04d82"
+  },
+  "id": "dUHyJyQa4jwPjeoGriHOk",
+  "tags": []
+}
