@@ -17,3 +17,9 @@ https://www.youtube.com/watch?v=3DftL1H7W7U
 https://www.youtube.com/watch?v=tAj_rN5YBHo
 
 ---
+
+**2026_01_13_早上**
+
+https://www.youtube.com/watch?v=2wKuNqy4czw
+
+---
