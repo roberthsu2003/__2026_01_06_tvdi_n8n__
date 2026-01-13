@@ -1,0 +1,328 @@
+{
+  "name": "lesson3_2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        -32
+      ],
+      "id": "7151de0f-0c32-4910-be6d-e36342092086",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2f5f8149-b88f-4dc6-a075-54fbde1a433c",
+              "name": "姓名",
+              "value": "徐國堂",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -80,
+        -32
+      ],
+      "id": "2abb6b62-8a7d-4752-ba1b-5b626d7d2db0",
+      "name": "第1個節點"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "903ae1f3-6160-43dc-b26f-6117f15775ae",
+              "name": "姓名",
+              "value": "={{ $json['姓名'] }}",
+              "type": "string"
+            },
+            {
+              "id": "d6194e51-4155-4710-a022-818172a5caf3",
+              "name": "age",
+              "value": "={{ $json.age }}",
+              "type": "number"
+            },
+            {
+              "id": "4e79108c-0f57-4453-8d59-91ca4c711f2f",
+              "name": "is man",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        336,
+        -32
+      ],
+      "id": "4383a220-3ad6-45fa-a576-db9fe1a4feb2",
+      "name": "第3節點"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c593b3a8-3876-4324-9102-21f634cd4a92",
+              "name": "姓名",
+              "value": "={{ $json['姓名'] }}",
+              "type": "string"
+            },
+            {
+              "id": "f912a7c7-3556-4d89-8e01-abac30e1c61b",
+              "name": "age",
+              "value": 25,
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        128,
+        -32
+      ],
+      "id": "879529c9-a56e-4f9f-9ed8-fb3065389604",
+      "name": "第2個"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "967a2ffb-9117-4675-9703-73e0ae7334ef",
+              "name": "姓名",
+              "value": "={{ $json['姓名'] }}",
+              "type": "string"
+            },
+            {
+              "id": "ea8ae4a4-8875-4c89-8126-6eaca9a3af30",
+              "name": "age",
+              "value": "={{ $json.age }}",
+              "type": "number"
+            },
+            {
+              "id": "7a97518e-98ed-423a-aca5-c119a327623e",
+              "name": "is man",
+              "value": "={{ $json['is man'] }}",
+              "type": "boolean"
+            },
+            {
+              "id": "780ebc5f-b7d1-470a-bddb-707f7f14c7e0",
+              "name": "food",
+              "value": "[2, 3, 4, null,  \"水\", true]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        144
+      ],
+      "id": "76711922-99a5-4ff8-8033-31018945e771",
+      "name": "第4個點1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f20f412f-d81f-4a6d-b7a3-9cfa043e9d63",
+              "name": "姓名",
+              "value": "={{ $('第4個點1').item.json['姓名'] }}",
+              "type": "string"
+            },
+            {
+              "id": "3dfe5282-3177-4d28-a94e-9df8f2219af5",
+              "name": "資料",
+              "value": "{num1:1,num2:\"2\",num3:null,num4:true}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        144
+      ],
+      "id": "cb99a9e6-0b82-4637-aa25-d1714af6eb02",
+      "name": "第6個節點"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "57a8efff-a25a-438e-9178-c6c5d85f5538",
+              "name": "姓名",
+              "value": "={{ $json['姓名'] }}",
+              "type": "string"
+            },
+            {
+              "id": "2f18f308-ce7d-4bc3-b971-a157d2729879",
+              "name": "age",
+              "value": "={{ $json.age }}",
+              "type": "number"
+            },
+            {
+              "id": "ec77a22c-2c84-441e-9538-8414ffd0fd7b",
+              "name": "is man",
+              "value": "={{ $json['is man'] }}",
+              "type": "boolean"
+            },
+            {
+              "id": "6ba77756-41ec-4262-9af5-a4ebe64b9637",
+              "name": "food[0]",
+              "value": "={{ $json.food[0] }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        144
+      ],
+      "id": "5c3681ba-fd4d-4081-a665-1e5718d7aff1",
+      "name": "第5個節點"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "47e3aec8-1587-497c-8d2a-c2c31badadb8",
+              "name": "資料",
+              "value": "={{ $json.資料.num1 }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1088,
+        144
+      ],
+      "id": "1ec81901-85ef-4018-82f6-04099af6fac7",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "第1個節點",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "第1個節點": {
+      "main": [
+        [
+          {
+            "node": "第2個",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "第2個": {
+      "main": [
+        [
+          {
+            "node": "第3節點",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "第3節點": {
+      "main": [
+        [
+          {
+            "node": "第4個點1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "第4個點1": {
+      "main": [
+        [
+          {
+            "node": "第5個節點",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "第5個節點": {
+      "main": [
+        [
+          {
+            "node": "第6個節點",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "第6個節點": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "cffbb62a-71b5-4377-bb1b-0235d9385214",
+  "meta": {
+    "instanceId": "d135f5bcfa8bdece905b6d778df94a7be68624c12d1878e14ba64eeb17a04d82"
+  },
+  "id": "uFsOC_G5AEWGqqIUK6M-y",
+  "tags": []
+}
