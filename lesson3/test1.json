@@ -1,0 +1,109 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "967a2ffb-9117-4675-9703-73e0ae7334ef",
+              "name": "姓名",
+              "value": "={{ $json['姓名'] }}",
+              "type": "string"
+            },
+            {
+              "id": "ea8ae4a4-8875-4c89-8126-6eaca9a3af30",
+              "name": "age",
+              "value": "={{ $json.age }}",
+              "type": "number"
+            },
+            {
+              "id": "7a97518e-98ed-423a-aca5-c119a327623e",
+              "name": "is man",
+              "value": "={{ $json['is man'] }}",
+              "type": "boolean"
+            },
+            {
+              "id": "780ebc5f-b7d1-470a-bddb-707f7f14c7e0",
+              "name": "food",
+              "value": "[2, 3, 4, null,  \"水\", true]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        544,
+        -32
+      ],
+      "id": "21e1b545-e4cd-49ae-b579-0fe38f3f23a0",
+      "name": "第4個點"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a7189bf9-31f6-4e3d-b066-5f3902b0e693",
+              "name": "姓名",
+              "value": "={{ $json['姓名'] }}",
+              "type": "string"
+            },
+            {
+              "id": "7f74d34f-8cb0-42b2-ba0d-272f602017c6",
+              "name": "age",
+              "value": "={{ $json.age }}",
+              "type": "number"
+            },
+            {
+              "id": "3c4757fd-beaa-412a-aebd-a147cf691b9d",
+              "name": "is man",
+              "value": "={{ $json['is man'] }}",
+              "type": "boolean"
+            },
+            {
+              "id": "f10d23fe-f12b-48cb-a1e4-9f1e6bbbebb0",
+              "name": "food0",
+              "value": "={{ $json.food[0] }}",
+              "type": "number"
+            },
+            {
+              "id": "7016529e-385a-49de-8a80-3a94ae807f8e",
+              "name": "food3",
+              "value": "={{ $json.food[3] }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        752,
+        -32
+      ],
+      "id": "b2082514-2cf1-44a2-8c4b-33a5e826c44c",
+      "name": "第5個節點"
+    }
+  ],
+  "connections": {
+    "第4個點": {
+      "main": [
+        [
+          {
+            "node": "第5個節點",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "d135f5bcfa8bdece905b6d778df94a7be68624c12d1878e14ba64eeb17a04d82"
+  }
+}
