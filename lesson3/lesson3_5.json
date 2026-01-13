@@ -1,0 +1,116 @@
+{
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        -80
+      ],
+      "id": "82636c0d-a9e2-4edb-9fb4-02dcc37e977a",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -112,
+        -80
+      ],
+      "id": "8dbcdf29-c693-4cdb-bc2b-8c2f038c7af8",
+      "name": "下載台北市youbike的json資料"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2cc654d9-8735-493c-8652-96ea3a23627a",
+              "name": "站點名稱",
+              "value": "={{ $json.sna }}",
+              "type": "string"
+            },
+            {
+              "id": "01282bd8-8e22-4fce-b47e-46aec06b99c7",
+              "name": "區域",
+              "value": "={{ $json.sarea }}",
+              "type": "string"
+            },
+            {
+              "id": "3a691d24-5f7a-4a45-b977-d6adc95348c7",
+              "name": "時間",
+              "value": "={{ $json.mday }}",
+              "type": "string"
+            },
+            {
+              "id": "21ecfbdb-e8f6-4dbb-a3e4-46f181d49534",
+              "name": "營業狀態",
+              "value": "={{ $json.act ? '營業中' : '休息中' }}",
+              "type": "string"
+            },
+            {
+              "id": "9e4ac7f9-fbb0-4165-8332-f9658a8863b5",
+              "name": "總數量",
+              "value": "={{ $json.Quantity }}",
+              "type": "number"
+            },
+            {
+              "id": "bc23fecd-43e7-466b-bfd6-ab8202d15f80",
+              "name": "可借",
+              "value": "={{ $json.available_rent_bikes }}",
+              "type": "number"
+            },
+            {
+              "id": "bd434e12-66d1-404b-a9a4-07f0b5e17605",
+              "name": "可還",
+              "value": "={{ $json.available_return_bikes }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        96,
+        -80
+      ],
+      "id": "3a8c458d-4743-437b-9012-d9f55a62d51a",
+      "name": "過濾資料"
+    }
+  ],
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "下載台北市youbike的json資料",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "下載台北市youbike的json資料": {
+      "main": [
+        [
+          {
+            "node": "過濾資料",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "d135f5bcfa8bdece905b6d778df94a7be68624c12d1878e14ba64eeb17a04d82"
+  }
+}
