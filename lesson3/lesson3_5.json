@@ -101,8 +101,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -304,
-        176
+        -336,
+        416
       ],
       "id": "d32d10b2-906e-4d6a-b857-6763b4b9aad7",
       "name": "Schedule Trigger"
@@ -275,11 +275,208 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        496,
-        48
+        544,
+        160
       ],
       "id": "fc56fc10-4c28-4a63-bd67-05a5210cc200",
       "name": "沒有可借車輛"
+    },
+    {
+      "parameters": {
+        "url": "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -112,
+        416
+      ],
+      "id": "096d1051-b64b-46a7-9b8f-103088875c7b",
+      "name": "下載台北市youbike的json資料2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2cc654d9-8735-493c-8652-96ea3a23627a",
+              "name": "站點名稱",
+              "value": "={{ $json.sna }}",
+              "type": "string"
+            },
+            {
+              "id": "01282bd8-8e22-4fce-b47e-46aec06b99c7",
+              "name": "區域",
+              "value": "={{ $json.sarea }}",
+              "type": "string"
+            },
+            {
+              "id": "3a691d24-5f7a-4a45-b977-d6adc95348c7",
+              "name": "時間",
+              "value": "={{ $json.mday }}",
+              "type": "string"
+            },
+            {
+              "id": "21ecfbdb-e8f6-4dbb-a3e4-46f181d49534",
+              "name": "營業狀態",
+              "value": "={{ $json.act ? '營業中' : '休息中' }}",
+              "type": "string"
+            },
+            {
+              "id": "9e4ac7f9-fbb0-4165-8332-f9658a8863b5",
+              "name": "總數量",
+              "value": "={{ $json.Quantity }}",
+              "type": "number"
+            },
+            {
+              "id": "bc23fecd-43e7-466b-bfd6-ab8202d15f80",
+              "name": "可借",
+              "value": "={{ $json.available_rent_bikes }}",
+              "type": "number"
+            },
+            {
+              "id": "bd434e12-66d1-404b-a9a4-07f0b5e17605",
+              "name": "可還",
+              "value": "={{ $json.available_return_bikes }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        416
+      ],
+      "id": "b68dd05a-6ab0-4d9b-96b3-cebfb669e8ca",
+      "name": "過濾資料2"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json['區域'] }}",
+                    "rightValue": "大安區",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ae34b1c9-6320-4b36-8486-473863929efe"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "caa97c98-fdd1-4bc8-b887-83816e5ba337",
+                    "leftValue": "={{ $json['區域'] }}",
+                    "rightValue": "北投區",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "4c117cc6-6e15-4f47-bbae-698cfe7c8cef",
+                    "leftValue": "={{ $json['站點名稱'] }}",
+                    "rightValue": "臺北市立大學",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        288,
+        416
+      ],
+      "id": "67720586-4017-4934-a5be-359957e38e01",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "81cf0135-404c-4bba-af45-8c865a7a416b",
+              "name": "站點名稱",
+              "value": "={{ $json['站點名稱'] }}",
+              "type": "string"
+            },
+            {
+              "id": "f1d7e689-2388-403d-b643-8ded5b913d3a",
+              "name": "區域",
+              "value": "={{ $json['區域'] }}",
+              "type": "string"
+            },
+            {
+              "id": "7fa5c5d5-559a-4218-a265-6398cc3d0bc1",
+              "name": "可借",
+              "value": "={{ $json['可借'] }}",
+              "type": "number"
+            },
+            {
+              "id": "50d5e720-1245-4c3e-99d0-81f580627db3",
+              "name": "可還",
+              "value": "={{ $json['可還'] }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        496,
+        528
+      ],
+      "id": "eeec6d13-2984-419d-b0b3-71f1aa7e336e",
+      "name": "Edit Fields"
     }
   ],
   "connections": {
@@ -309,7 +506,7 @@
       "main": [
         [
           {
-            "node": "下載台北市youbike的json資料1",
+            "node": "下載台北市youbike的json資料2",
             "type": "main",
             "index": 0
           }
@@ -343,6 +540,41 @@
         [
           {
             "node": "沒有可借車輛",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "下載台北市youbike的json資料2": {
+      "main": [
+        [
+          {
+            "node": "過濾資料2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "過濾資料2": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [],
+        [],
+        [
+          {
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
