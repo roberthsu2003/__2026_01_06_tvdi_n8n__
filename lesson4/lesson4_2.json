@@ -1,0 +1,159 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "學生成績輸入",
+        "formDescription": "每個欄位必需填寫",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "學號",
+              "fieldLabel": "請輸入學號",
+              "fieldType": "number",
+              "placeholder": "20230517",
+              "requiredField": true
+            },
+            {
+              "fieldName": "姓名",
+              "fieldLabel": "請填入姓名",
+              "requiredField": true
+            },
+            {
+              "fieldName": "國文",
+              "fieldLabel": "國文分數",
+              "fieldType": "number",
+              "placeholder": "0~100",
+              "requiredField": true
+            },
+            {
+              "fieldName": "英文",
+              "fieldLabel": "請填入英文",
+              "fieldType": "number",
+              "placeholder": "0~100",
+              "requiredField": true
+            },
+            {
+              "fieldName": "數學",
+              "fieldLabel": "請輸入數學分數",
+              "fieldType": "number",
+              "placeholder": "0~100",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8e0ee17c-9875-4a64-b93f-dc583850f9af",
+      "name": "On form submission",
+      "webhookId": "7d6b7a14-b105-4b2f-af1e-e7c5e9eace34"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "eZKF1CxJouzs4tzv",
+          "mode": "list",
+          "cachedResultName": "學生成績表格",
+          "cachedResultUrl": "/projects/GqUktFsecD8oxSKs/datatables/eZKF1CxJouzs4tzv"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json['姓名'] }}",
+            "class_id": "={{ $json['學號'] }}",
+            "chinese": "={{ $json['國文'] }}",
+            "english": "={{ $json['英文'] }}",
+            "math": "={{ $json['數學'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "class_id",
+              "displayName": "class_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "chinese",
+              "displayName": "chinese",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "english",
+              "displayName": "english",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "math",
+              "displayName": "math",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "8fec5956-8fab-42d1-a4ed-36cc69540565",
+      "name": "Insert row"
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "d135f5bcfa8bdece905b6d778df94a7be68624c12d1878e14ba64eeb17a04d82"
+  }
+}
