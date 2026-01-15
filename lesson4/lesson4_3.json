@@ -27,6 +27,24 @@
               "fieldName": "姓名",
               "fieldLabel": "你的名字",
               "requiredField": true
+            },
+            {
+              "fieldName": "主菜名稱",
+              "fieldLabel": "請輸入中文名稱",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "排骨-130"
+                  },
+                  {
+                    "option": "雞腿-150"
+                  },
+                  {
+                    "option": "素食- 180"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -47,8 +65,8 @@
     {
       "parameters": {
         "operation": "completion",
-        "completionTitle": "感謝你的訂購",
-        "completionMessage": "記得要交錢",
+        "completionTitle": "=感謝{{ $json['姓名'] }}的訂購",
+        "completionMessage": "={{ $json['主菜名稱'] }},請在10點前,交給國堂",
         "options": {}
       },
       "type": "n8n-nodes-base.form",
@@ -57,9 +75,9 @@
         416,
         0
       ],
-      "id": "bc9108e2-9313-44cc-be2a-c0f70f709180",
+      "id": "ba0ce19b-3e8e-4e82-a634-8f4acd85de5a",
       "name": "Form1",
-      "webhookId": "39ab559d-cfdb-40f1-83c9-b748d170995f"
+      "webhookId": "2ccc7363-f618-4c7f-9e00-1e6762f6c5c8"
     }
   ],
   "connections": {
