@@ -2,11 +2,11 @@
   "nodes": [
     {
       "parameters": {
-        "formTitle": "訂便當表格",
-        "formDescription": "吃飯",
+        "formTitle": "中午訂便當表格",
+        "formDescription": "要訂便當的,請填寫",
         "options": {
           "appendAttribution": false,
-          "buttonLabel": "開始選產品"
+          "buttonLabel": "開始點餐"
         }
       },
       "type": "n8n-nodes-base.formTrigger",
@@ -30,7 +30,7 @@
             },
             {
               "fieldName": "主菜名稱",
-              "fieldLabel": "請輸入中文名稱",
+              "fieldLabel": "請選取便當種類",
               "fieldType": "dropdown",
               "fieldOptions": {
                 "values": [
@@ -66,18 +66,81 @@
       "parameters": {
         "operation": "completion",
         "completionTitle": "=感謝{{ $json['姓名'] }}的訂購",
-        "completionMessage": "={{ $json['主菜名稱'] }},請在10點前,交給國堂",
+        "completionMessage": "=你點選{{ $json['主菜名稱'] }},請在10點前,交給國堂",
         "options": {}
       },
       "type": "n8n-nodes-base.form",
       "typeVersion": 2.4,
       "position": [
-        416,
+        400,
         0
       ],
       "id": "ba0ce19b-3e8e-4e82-a634-8f4acd85de5a",
       "name": "Form1",
       "webhookId": "2ccc7363-f618-4c7f-9e00-1e6762f6c5c8"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "e2FyDYsCvI5OmnM6",
+          "mode": "list",
+          "cachedResultName": "單餐資料",
+          "cachedResultUrl": "/projects/GqUktFsecD8oxSKs/datatables/e2FyDYsCvI5OmnM6"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "name": "={{ $json['姓名'] }}",
+            "kind": "={{ $json['主菜名稱'] }}",
+            "datatime": "={{ $json.submittedAt }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "kind",
+              "displayName": "kind",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "datatime",
+              "displayName": "datatime",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        608,
+        0
+      ],
+      "id": "4026da0c-c6a8-4c47-8d3e-a46c32c3f60b",
+      "name": "Insert row"
     }
   ],
   "connections": {
@@ -97,6 +160,17 @@
         [
           {
             "node": "Form1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form1": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
             "type": "main",
             "index": 0
           }
