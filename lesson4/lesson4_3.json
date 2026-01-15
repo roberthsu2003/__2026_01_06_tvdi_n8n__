@@ -1,0 +1,93 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "訂便當表格",
+        "formDescription": "吃飯",
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "開始選產品"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ad3fd8ad-cc2d-423b-9859-057756ac4d9b",
+      "name": "On form submission",
+      "webhookId": "c8d6ca68-2a15-4c3a-a17b-041df8511fc9"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "姓名",
+              "fieldLabel": "你的名字",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "buttonLabel": "下一頁"
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "fcc8c9db-8230-4dfb-aa2e-349c2b8fefd7",
+      "name": "Form",
+      "webhookId": "f4b1b77d-b712-48b5-93b0-f2cc3a772680"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "感謝你的訂購",
+        "completionMessage": "記得要交錢",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "bc9108e2-9313-44cc-be2a-c0f70f709180",
+      "name": "Form1",
+      "webhookId": "39ab559d-cfdb-40f1-83c9-b748d170995f"
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form": {
+      "main": [
+        [
+          {
+            "node": "Form1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "d135f5bcfa8bdece905b6d778df94a7be68624c12d1878e14ba64eeb17a04d82"
+  }
+}
