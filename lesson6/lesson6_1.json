@@ -27,16 +27,86 @@
     },
     {
       "parameters": {
-        "jsCode": "const result = [];\n\nfor (const item of items) {\n  const area = item.json.sarea;\n\n  if (area === '大安區' || area === '士林區' || area === '北投區') {\n    result.push({\n      json: {\n        ...item.json,\n        district: area  // 添加區域標記\n      }\n    });\n  }\n}\n\nreturn result;"
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.sarea }}",
+                    "rightValue": "大安區",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "28d394b6-4637-4462-9fc3-d5ba8262db76"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3538da87-b80d-46bc-9fb5-a224904520b1",
+                    "leftValue": "={{ $json.sarea }}",
+                    "rightValue": "士林區",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "5edd0c1d-9f90-4080-b3bf-8fc689c04672",
+                    "leftValue": "={{ $json.sarea }}",
+                    "rightValue": "北投區",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
       "position": [
-        176,
-        -80
+        192,
+        -96
       ],
-      "id": "591224e3-b0d1-4bb6-98e2-ba6d9c5687e7",
-      "name": "Code in JavaScript"
+      "id": "320ba65e-e3ec-4f02-a30d-89e53f9407cd",
+      "name": "Switch"
     }
   ],
   "connections": {
@@ -55,7 +125,7 @@
       "main": [
         [
           {
-            "node": "Code in JavaScript",
+            "node": "Switch",
             "type": "main",
             "index": 0
           }
