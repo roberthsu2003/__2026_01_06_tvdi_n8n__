@@ -245,7 +245,7 @@
       "typeVersion": 4.7,
       "position": [
         592,
-        -208
+        -320
       ],
       "id": "eeb5e4f2-5a4b-4f49-b67c-9637806a715a",
       "name": "Append or update row in sheet",
@@ -366,6 +366,40 @@
       ],
       "id": "39db385d-ad62-4e73-8be1-5e8cac653d94",
       "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "name": "北投.xlsx",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1y0Mef3-aRB99SXjI9__VYSQxhdktiAWA",
+          "mode": "list",
+          "cachedResultName": "n8n_tvdi",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1y0Mef3-aRB99SXjI9__VYSQxhdktiAWA"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        800,
+        80
+      ],
+      "id": "56301237-2f9c-44dd-aada-797e06767a65",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wpB2oMnhHsSdebBC",
+          "name": "Google Drive localhost"
+        }
+      }
     }
   ],
   "connections": {
@@ -421,6 +455,17 @@
         [
           {
             "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
             "type": "main",
             "index": 0
           }
