@@ -48,3 +48,9 @@ https://youtube.com/live/zguvZzAJsSY
 https://www.youtube.com/watch?v=FZtPZFAYv7s
 
 ---
+
+**2026_01_22_早上**
+
+https://www.youtube.com/watch?v=-xoGM1LJS5c
+
+----
