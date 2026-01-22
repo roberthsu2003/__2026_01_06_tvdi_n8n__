@@ -1,0 +1,484 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -416,
+        240
+      ],
+      "id": "04563215-f66c-47b1-8c99-5a283e7bccf5",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json['區域'] }}",
+                    "rightValue": "大安區",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "28d394b6-4637-4462-9fc3-d5ba8262db76"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3538da87-b80d-46bc-9fb5-a224904520b1",
+                    "leftValue": "={{ $json['區域'] }}",
+                    "rightValue": "士林區",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "5edd0c1d-9f90-4080-b3bf-8fc689c04672",
+                    "leftValue": "={{ $json['區域'] }}",
+                    "rightValue": "北投區",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -16,
+        224
+      ],
+      "id": "ef27e35b-9833-49ac-9c12-353fde93e009",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "78e00a81-42a8-40ff-9573-c160be24ac10",
+              "name": "站點名稱",
+              "value": "={{ $json.sna }}",
+              "type": "string"
+            },
+            {
+              "id": "f794bf14-2098-46f2-9900-39dab73fbd03",
+              "name": "區域",
+              "value": "={{ $json.sarea }}",
+              "type": "string"
+            },
+            {
+              "id": "035b00c5-9e2f-4039-b73d-f577f8bbea4a",
+              "name": "時間",
+              "value": "={{ $json.mday }}",
+              "type": "string"
+            },
+            {
+              "id": "6fe9caa1-b890-45ac-93d3-e6210195ebc0",
+              "name": "總車輛數",
+              "value": "={{ $json.Quantity }}",
+              "type": "number"
+            },
+            {
+              "id": "39f68651-288b-4def-8076-5cf6227e64ae",
+              "name": "可借",
+              "value": "={{ $json.available_rent_bikes }}",
+              "type": "number"
+            },
+            {
+              "id": "4bd9bcf5-8fc2-4105-92da-3cf2883c7211",
+              "name": "可還",
+              "value": "={{ $json.available_return_bikes }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -208,
+        240
+      ],
+      "id": "73aaece3-c1b3-4469-b46f-d8d30dfbb4ff",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1w1mWPFean4TTl4TsJA_QnHb8LRMGy31RuHk_eihu5zA",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 949024395,
+          "mode": "list",
+          "cachedResultName": "大安區",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w1mWPFean4TTl4TsJA_QnHb8LRMGy31RuHk_eihu5zA/edit#gid=949024395"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "站點名稱": "={{ $json['站點名稱'] }}",
+            "時間": "={{ $json['時間'] }}",
+            "總車輛數": "={{ $json['總車輛數'] }}",
+            "可借": "={{ $json['可借'] }}",
+            "可還": "={{ $json['可還'] }}"
+          },
+          "matchingColumns": [
+            "站點名稱"
+          ],
+          "schema": [
+            {
+              "id": "站點名稱",
+              "displayName": "站點名稱",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "時間",
+              "displayName": "時間",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "總車輛數",
+              "displayName": "總車輛數",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "可借",
+              "displayName": "可借",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "可還",
+              "displayName": "可還",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        192,
+        0
+      ],
+      "id": "9122e974-7cd1-4165-90fd-cd2cf51f72f7",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "P5aeSky9Aez0k63U",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1w1mWPFean4TTl4TsJA_QnHb8LRMGy31RuHk_eihu5zA",
+          "mode": "list",
+          "cachedResultName": "youbike",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w1mWPFean4TTl4TsJA_QnHb8LRMGy31RuHk_eihu5zA/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "士林區",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1w1mWPFean4TTl4TsJA_QnHb8LRMGy31RuHk_eihu5zA/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "站點名稱": "={{ $json['站點名稱'] }}",
+            "時間": "={{ $json['時間'] }}",
+            "總車輛數": "={{ $json['總車輛數'] }}",
+            "可借": "={{ $json['可借'] }}",
+            "可還": "={{ $json['可還'] }}"
+          },
+          "matchingColumns": [
+            "站點名稱"
+          ],
+          "schema": [
+            {
+              "id": "站點名稱",
+              "displayName": "站點名稱",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "時間",
+              "displayName": "時間",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "總車輛數",
+              "displayName": "總車輛數",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "可借",
+              "displayName": "可借",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "可還",
+              "displayName": "可還",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        192,
+        224
+      ],
+      "id": "3d245855-e1b2-4fc8-bb2e-08c42b8c9769",
+      "name": "Append or update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "P5aeSky9Aez0k63U",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        192,
+        400
+      ],
+      "id": "9a5780e0-d888-459e-83f3-330a7e26eb22",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "name": "北投.xlsx",
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1y0Mef3-aRB99SXjI9__VYSQxhdktiAWA",
+          "mode": "list",
+          "cachedResultName": "n8n_tvdi",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1y0Mef3-aRB99SXjI9__VYSQxhdktiAWA"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        400,
+        400
+      ],
+      "id": "199ecdfe-7f83-4bac-9361-84a2d08eb3b3",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "wpB2oMnhHsSdebBC",
+          "name": "Google Drive localhost"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "64ed4de6-ed5e-4095-995f-6f814262737b",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -608,
+        240
+      ],
+      "id": "6e79393b-184f-4045-b81d-8e773c8ba4d5",
+      "name": "Webhook",
+      "webhookId": "64ed4de6-ed5e-4095-995f-6f814262737b"
+    }
+  ],
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "d135f5bcfa8bdece905b6d778df94a7be68624c12d1878e14ba64eeb17a04d82"
+  }
+}
