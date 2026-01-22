@@ -352,6 +352,20 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        592,
+        80
+      ],
+      "id": "39db385d-ad62-4e73-8be1-5e8cac653d94",
+      "name": "Convert to File"
     }
   ],
   "connections": {
@@ -389,6 +403,13 @@
         [
           {
             "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Convert to File",
             "type": "main",
             "index": 0
           }
