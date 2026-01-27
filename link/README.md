@@ -58,3 +58,8 @@ https://www.youtube.com/watch?v=-xoGM1LJS5c
 https://www.youtube.com/watch?v=_oMZraIWwc0
 
 ----
+
+**2026_01_27_早上**
+
+https://www.youtube.com/watch?v=4wV_lxtgKJc
+---
