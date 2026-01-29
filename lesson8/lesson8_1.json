@@ -18,7 +18,7 @@
     {
       "parameters": {
         "options": {
-          "systemMessage": "=你是一個「提供各種不同類型新聞的機器人」，不是聊天機器人。\n\n你的任務是：\n根據使用者的需求描述，從下列 RSS 清單中，\n選擇「最適合的一個 RSS Feed URL」。並且使用工具取得內容\n\n請遵守以下規則：\n1. 不要自行發明不存在的網址\n2. 所有的回覆,請使用繁體中文\n3. 所有文章的標題,請翻譯成為繁體中文\n3. 如果使用者沒有要求文章數目,最多回覆5筆\n\n我有提供RSS read的工具\n\n可用的 RSS Feed 清單如下：\n\n## 一、科技新聞媒體\n\n### 1. TechNews 科技新報\n- 類型：純科技新聞（半導體、網際網路、能源、AI 等）\n- RSS feed 網址：\n  - 全站最新文章：`https://technews.tw/feed/`\n- 說明：台灣主要科技媒體之一，內容偏產業與技術新聞，適合訂閱最新科技動態。\n\n\n\n\n請只根據「使用者輸入內容」進行判斷並輸出結果。"
+          "systemMessage": "=你是一個「會使用工具的機器人」，不是聊天機器人。\n\n工具:\n1. 提供RSS read的工具\n2. 查詢天氣的工具\n\n你的任務是：\n根據使用者的需求描述，從下列 RSS 清單中，\n選擇「最適合的一個 RSS Feed URL」。並且使用工具取得內容\n\n請遵守以下規則：\n1. 不要自行發明不存在內容\n2. 所有的回覆,請使用繁體中文\n3. 所有文章的標題,請翻譯成為繁體中文\n4. 如果使用者沒有要求文章數目,最多回覆5筆\n5. 使用繁體中文回應，語氣專業、有禮貌，但保持自然、口語化。\n\n\n\n可用的 RSS Feed 清單如下：\n\n## 一、科技新聞媒體\n\n### 1. TechNews 科技新報\n- 類型：純科技新聞（半導體、網際網路、能源、AI 等）\n- RSS feed 網址：\n  - 全站最新文章：`https://technews.tw/feed/`\n- 說明：台灣主要科技媒體之一，內容偏產業與技術新聞，適合訂閱最新科技動態。\n\n\n\n\n請只根據「使用者輸入內容」進行判斷並輸出結果。"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -71,11 +71,63 @@
       "type": "n8n-nodes-base.rssFeedReadTool",
       "typeVersion": 1.2,
       "position": [
-        240,
-        176
+        256,
+        160
       ],
       "id": "7ea025ec-4ad4-4858-ad0a-197c0256ff06",
       "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "toolDescription": "這個API是查詢各大都市的天氣預測",
+        "url": "https://api.open-meteo.com/v1/forecast",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "latitude",
+              "value": "={{ $fromAI('latitude', '位置緯度。可根據城市名稱自動推斷。例如：台北的緯度為 25.03。', 'number') }}"
+            },
+            {
+              "name": "longitude",
+              "value": "={{ $fromAI('longitude', '位置的經度。可根據城市名稱自動推斷。例如：台北的經度為 121.56。', 'number') }}"
+            },
+            {
+              "name": "current",
+              "value": "={{ $fromAI('current', '目前天氣變數（逗號分隔，無空格）。僅用於當前/現在查詢。用於天氣預報查詢時留空。例如：temperature_2m,windspeed_10m,rain。選項：temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,showers,snowfall,weathercode,cloudcover_total,pressure_msl,surface_pressure,windspeed_10m,winddirection_10m,winsurface_pressure,windspeed_10m,winddirection_10m,wind', 'string') }}"
+            },
+            {
+              "name": "hourily",
+              "value": "={{ $fromAI('hourly', '每小時天氣變數（逗號分隔，無空格）。用於單日詳細天氣預報。留空則顯示目前天氣或每日概覽。例如：temperature_2m,precipitation。選項：temperature_2m,relative_humidity_2m,dewpoint_2m,apparent_temperature,precipitation,rain,showers,snowfall,snow_depth,pressure_msl,surface_pressure,cloudcover_total,cloudcover_low,cloudc over_mid,cloudcover_high,windspeed_10m,winddirection_10m,windgusts_10m,consibility,is_day,sunshine_duration,soil_temperature,soil_moisture,PM10,PM2.5,carbon_monoxoxet', 'string') }}"
+            },
+            {
+              "name": "daily",
+              "value": "={{ $fromAI('daily', '每日天氣變數（逗號分隔，無空格）。用於多日天氣預報概覽。留空則顯示目前天氣或每小時詳情。例如：temperature_2m_max,precipitation_sum。選項：weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,sunrise,sunset,dayl ight_duration,sunshine_duration,pressure_msl_max,pressure_msl_min,surface_pressure_max,surface_pressure_min,windgusts_10m_max,windspeed_10m_max,winddirection_10m_dominant,shortwave_radiation_sum', 'string') }}"
+            },
+            {
+              "name": "start_date",
+              "value": "={{ $fromAI('start_date', '起始日期格式為 YYYY-MM-DD。每小時/每日天氣預報必須填寫此項目。留空則顯示目前天氣。如果未指定，則預設為今天。', 'string', $now.toFormat('yyyy-MM-dd')) }}"
+            },
+            {
+              "name": "end_date",
+              "value": "={{ $fromAI('end_date', '結束日期格式為 YYYY-MM-DD。必須晚於開始日期。小時/每日天氣預報為必填項。留空則表示目前天氣。如果未指定，則預設為 7 天後。', 'string', $now.plus({ days: 7 }).toFormat('yyyy-MM-dd')) }}"
+            },
+            {
+              "name": "temperature_unit",
+              "value": "={{ $fromAI('temperature_unit', '溫度單位：celsius or fahrenheit', 'string', 'celsius') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.3,
+      "position": [
+        384,
+        144
+      ],
+      "id": "a985abae-969b-4ab3-a8c9-ecf4ceaf5726",
+      "name": "HTTP Request"
     }
   ],
   "connections": {
@@ -113,6 +165,17 @@
       ]
     },
     "RSS Read": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
       "ai_tool": [
         [
           {
