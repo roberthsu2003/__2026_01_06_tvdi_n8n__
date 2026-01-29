@@ -1,0 +1,132 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -112,
+        -64
+      ],
+      "id": "873abb1f-c289-4ef8-aef7-d3f284eecff1",
+      "name": "When chat message received",
+      "webhookId": "74c4c4fc-16fa-41d1-8abe-1029b21d9561"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=你是一個「提供各種不同類型新聞的機器人」，不是聊天機器人。\n\n你的任務是：\n根據使用者的需求描述，從下列 RSS 清單中，\n選擇「最適合的一個 RSS Feed URL」。並且使用工具取得內容\n\n請遵守以下規則：\n1. 不要自行發明不存在的網址\n2. 所有的回覆,請使用繁體中文\n3. 所有文章的標題,請翻譯成為繁體中文\n3. 如果使用者沒有要求文章數目,最多回覆5筆\n\n我有提供RSS read的工具\n\n可用的 RSS Feed 清單如下：\n\n## 一、科技新聞媒體\n\n### 1. TechNews 科技新報\n- 類型：純科技新聞（半導體、網際網路、能源、AI 等）\n- RSS feed 網址：\n  - 全站最新文章：`https://technews.tw/feed/`\n- 說明：台灣主要科技媒體之一，內容偏產業與技術新聞，適合訂閱最新科技動態。\n\n\n\n\n請只根據「使用者輸入內容」進行判斷並輸出結果。"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        96,
+        -64
+      ],
+      "id": "63d5129e-0067-430b-8b01-1248d4b173b6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "gpt-oss:20b-cloud",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        144
+      ],
+      "id": "54c6fa51-2b86-4217-a2e4-ec0ae4ecf31d",
+      "name": "Ollama Chat Model",
+      "credentials": {
+        "ollamaApi": {
+          "id": "puHSzMoUUx9WwTbB",
+          "name": "Ollama account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 2
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        112,
+        160
+      ],
+      "id": "4ff3052e-9a07-41aa-a20d-0c056f955fb3",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedReadTool",
+      "typeVersion": 1.2,
+      "position": [
+        240,
+        176
+      ],
+      "id": "7ea025ec-4ad4-4858-ad0a-197c0256ff06",
+      "name": "RSS Read"
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d135f5bcfa8bdece905b6d778df94a7be68624c12d1878e14ba64eeb17a04d82"
+  }
+}
