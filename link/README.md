@@ -69,7 +69,12 @@ https://www.youtube.com/watch?v=G71YH8ZkDOY
 
 ---
 
-**2026_01_29**
+**2026_01_29_早上**
+
 https://www.youtube.com/watch?v=xEDkPbs3Okc
+
+**2026_01_29_下午**
+
+https://www.youtube.com/watch?v=jDVZH383_ZA
 
 ---
